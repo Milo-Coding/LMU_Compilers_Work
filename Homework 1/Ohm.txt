@@ -1,0 +1,106 @@
+5) Ohm Grammer
+A) -2**2 evaluates to 4
+Exp                 = Exp ("+" | "-") Term              --binary
+                    | Term
+Term                = Term ("*" | "/" | "%") Factor     --binary
+                    | Factor
+Factor              = Primary "**" Factor         	--binary
+                    | Primary
+Primary             = id
+                    | number
+                    | "-" Primary                       --negation
+                    | "(" Exp ")"                       --parens
+
+
+B) -2**2 evaluates to -4
+Exp                 = Exp ("+" | "-") Term              --binary
+                    | Term
+Term                = Term ("*" | "/" | "%") Factor     --binary
+                    | Factor
+Factor              = Primary "**" Factor               --binary
+                    | Primary
+Primary        	    = id
+                    | number
+                    | "-" Exp                           --negation
+                    | "(" Exp ")"                       --parens
+
+
+C) -2**2 is a syntax error, while allowing (-2)**2 and -(2**2) to be legal 
+Exp                 = Exp ("+" | "-") Term              --binary
+                    | Term        
+Term                = Term ("*" | "/" | "%") Factor     --binary
+                    | Factor          
+Factor              = Primary "**" Factor               --binary
+                    | "-" Primary                       --negation
+                    | Primary          
+Primary             = id
+                    | number
+                    | "(" Exp ")"                       --parens          
+
+
+6) Astro++
+AstroPlusPlus {
+  Program           = Statement+
+  Statement         = id "=" Exp ";"                    --assign
+                    | print Exp ";"                     --print
+                    | while Exp "{" BStatement* "}"     --while
+                    | if Exp "{" Statement* "}" (elseIf Exp "{" Statement* "}")* (else "{" Statement* "}")?  --if
+                    | Exp                               --call
+
+
+  BStatement        = id "=" Exp ";"                    --assign
+                    | print Exp ";"                     --print
+                    | break ";"                         --break
+                    | while Exp "{" BStatement* "}"     --while
+                    | if Exp "{" BStatement* "}" (elseIf Exp "{" BStatement* "}")* (else "{" BStatement* "}")? --if
+                    | Exp                               --call
+
+
+  Exp               = Condition binaryOp Condition      --binary
+                    | Condition
+
+
+  Condition         = Condition addOp Term              --binary
+                    | Term
+
+
+  Term              = Term mulOp Factor                 --binary
+                    | Factor
+
+
+  Factor            = Primary "**" Factor               --binary
+                    | "-" Primary                       --negation
+                    | Primary
+
+
+  Primary           = id
+                    | number
+                    | "(" Exp ")"                       --parens
+              
+  keyword           = print | if | elseIf | else | while | break
+  print             = "print" ~idchar
+  if                = "if" ~idchar
+  elseIf            = "elseIf" ~idchar
+  else              = "else" ~idchar
+  while             = "while" ~idchar
+  break             = "break" ~idchar
+
+
+  idchar            = letter | digit | "_"
+
+
+  id                = ~keyword letter idchar*
+
+
+  number            = digit+ ("." digit+)? (("E" | "e") ("+" | "-")? digit+)?
+
+
+  space            += comment
+  comment           = "//" (~"\n" any)*                 --single
+                    | "/*" (~"*/" any)* "*/"            --multi
+
+
+  binaryOp    = "==" | "!=" | "<=" | "<" | ">=" | ">"
+  addOp       = "+" | "-"
+  mulOp       = "*" | "/" | "%"
+}
