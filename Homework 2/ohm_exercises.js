@@ -65,13 +65,13 @@ const grammars = {
 
     palindromes2358: String.raw`
       palindrome = pal8 | pal5 | pal3 | pal2
-legalletter = "a" | "b" | "c"
-pal2 = "aa" | "bb" | "cc"
-pal3 = ("a" legalletter "a") | ("b" legalletter "b") | ("c" legalletter "c")
-pal4 = ("a" pal2 "a") | ("b" pal2 "b") | ("c" pal2 "c")
-pal5 = ("a" pal3 "a") | ("b" pal3 "b") | ("c" pal3 "c")
-pal6 = ("a" pal4 "a") | ("b" pal4 "b") | ("c" pal4 "c")
-pal8 = ("a" pal6 "a") | ("b" pal6 "b") | ("c" pal6 "c")
+      legalletter = "a" | "b" | "c"
+      pal2 = "aa" | "bb" | "cc"
+      pal3 = ("a" legalletter "a") | ("b" legalletter "b") | ("c" legalletter "c")
+      pal4 = ("a" pal2 "a") | ("b" pal2 "b") | ("c" pal2 "c")
+      pal5 = ("a" pal3 "a") | ("b" pal3 "b") | ("c" pal3 "c")
+      pal6 = ("a" pal4 "a") | ("b" pal4 "b") | ("c" pal4 "c")
+      pal8 = ("a" pal6 "a") | ("b" pal6 "b") | ("c" pal6 "c")
     `,
 
     pythonStringLiterals: String.raw`
