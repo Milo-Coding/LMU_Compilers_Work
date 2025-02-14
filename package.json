@@ -1,0 +1,16 @@
+{
+  "name": "lmu_compilers_work",
+  "version": "1.0.0",
+  "description": "Somewhere for me to save and show off my work from the languages and automata II (Compilers) class I took at LMU",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Milo Fritzen",
+  "license": "MIT",
+  "dependencies": {
+    "ohm-js": "^17.1.0"
+  }
+}
