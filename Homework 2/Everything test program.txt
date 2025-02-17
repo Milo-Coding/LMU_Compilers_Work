@@ -1,0 +1,25 @@
+func name (@hi, p_r@m$)
+"hi ";
+"@";
+100.3e1;
+1;
+-1.0;
+3E4;
+helloworld["hel1o", @hi];
+"this is \u{13AF23}a string\n";  -- this is a comment
+"\\ \' \u{B}"; --a string full of escape characters
+"\u{a}"; -- this is a string of characters that are not quite an escape character
+"first half
+second half" --splitting a string across lines like this is legal
+end
+end
+
+func helloworld(input)
+"\"Hello, World!\""
+end
+end
+
+func doNothing() end end
+
+name[100]
+

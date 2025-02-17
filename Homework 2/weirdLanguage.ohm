@@ -1,0 +1,32 @@
+G {
+Prog	= FunDecl* Exp
+FunDecl	= func id Params ExpSeq kw_end
+Exp		= FunCall | id | numLit | strLit
+		| "(" Exp ")"	--parens
+        | Exp "!"		--factorial
+        | "-" Exp		--unary
+        | Exp "*" Exp	--mul
+    	| Exp "/" Exp	--div
+		| Exp "+" Exp	--add
+    	| Exp "-" Exp	--sub
+        | Exp "if" id "else" Exp --conditional
+Params 	= "(" id? ("," id)* ")"
+ExpSeq 	= Exp? (";" Exp)* kw_end
+
+idchar 	= letter | digit | "_" | "@" | "$"
+id 		= ~keyword (letter | "@") idchar*
+
+keyword = func | kw_end
+func 	= "func" ~idchar
+kw_end 	= "end" ~idchar
+
+numLit 	= digit+ ("." digit+)? (("e" | "E") digit+)?
+strLit	= "\"" (escape | ~"\"" any)* "\""
+escape  = "\\'" | "\\\"" | "\\n" | "\\\\"
+		| "\\u{" h h? h? h? h? h? "}"	--hex
+h		= digit | "A".."F"
+FunCall = id "[" Exp? ("," Exp)* "]"
+
+space  += "--" comment_char*	--comment
+comment_char = ~"\n" ~"\r\n" any
+}
