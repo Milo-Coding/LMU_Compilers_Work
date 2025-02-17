@@ -10,7 +10,8 @@ helloworld["hel1o", @hi];
 "\\ \' \u{B}"; --a string full of escape characters
 "\u{a}"; -- this is a string of characters that are not quite an escape character
 "first half
-second half" --splitting a string across lines like this is legal
+second half"; --splitting a string across lines like this is legal
+"-- this is still a string"
 end
 end
 
