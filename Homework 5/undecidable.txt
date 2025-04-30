@@ -1,0 +1,8 @@
+To prove that the language L = {⟨M₁⟩⟨M₂⟩ | L(M₁) = L(M₂)} is
+undecidable, we reduce from the Halting Problem. Given an instance
+⟨M,w⟩, we construct two machines: M₁ that always accepts all inputs
+(L(M₁) = Σ*), and M₂ that first simulates M on w and then accepts
+its own input if M halts on w (otherwise loops forever). If M halts
+on w, then L(M₂) = Σ* = L(M₁); if M doesn't halt, then L(M₂) = ∅ ≠ L(M₁).
+This creates a valid mapping where ⟨M,w⟩ ∈ HALT if and only if ⟨M₁⟩⟨M₂⟩ ∈ L.
+Since the Halting Problem is undecidable, L must also be undecidable.
