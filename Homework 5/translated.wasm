@@ -1,0 +1,76 @@
+f(int):
+        // Set up the stack frame
+        global.get      __stack_pointer       // Get current stack pointer
+        local.set       1                     // Store it in local variable 1
+        i32.const       16                    // Stack frame size: 16 bytes
+        local.set       2                     // Store 16 in local variable 2
+        local.get       1                     // Get the stack pointer
+        local.get       2                     // Get the frame size (16)
+        i32.sub                               // Subtract to allocate stack space
+        local.set       3                     // Store new stack pointer in local 3
+
+        // Store function parameter in stack
+        local.get       3                     // Get the new stack pointer
+        local.get       0                     // Get function parameter (an integer)
+        i32.store       12                    // Store parameter at offset 12 from stack pointer
+
+        // Check if parameter is even or odd by calculating n % 2
+        local.get       3                     // Get stack pointer
+        i32.load        12                    // Load parameter value from stack
+        local.set       4                     // Store parameter in local 4
+        i32.const       2                     // Load constant 2
+        local.set       5                     // Store 2 in local 5
+        local.get       4                     // Get parameter value
+        local.get       5                     // Get constant 2
+        i32.rem_s                             // Calculate remainder (parameter % 2)
+        local.set       6                     // Store result in local 6
+
+        // Begin conditional block structure
+        block                                 // Outer block
+        block                                 // Inner block for the "if" branch
+        
+        // If remainder is non-zero (odd number), branch to the "else" part
+        local.get       6                     // Get remainder result
+        br_if           0                     // Branch to end of inner block if non-zero (odd)
+        
+        // "if" branch: for even numbers, calculate n/2
+        local.get       3                     // Get stack pointer
+        i32.load        12                    // Load parameter again
+        local.set       7                     // Store in local 7
+        i32.const       2                     // Load constant 2
+        local.set       8                     // Store in local 8
+        local.get       7                     // Get parameter
+        local.get       8                     // Get constant 2
+        i32.div_s                             // Calculate integer division (parameter / 2)
+        local.set       9                     // Store result in local 9
+        local.get       9                     // Get division result
+        local.set       10                    // Store result in local 10 (return value)
+        br              1                     // Branch to end of outer block
+        end_block                             // End of "if" block
+        
+        // "else" branch: for odd numbers, calculate 3*n + 1
+        local.get       3                     // Get stack pointer
+        i32.load        12                    // Load parameter again
+        local.set       11                    // Store in local 11
+        i32.const       3                     // Load constant 3
+        local.set       12                    // Store in local 12
+        local.get       11                    // Get parameter
+        local.get       12                    // Get constant 3
+        i32.mul                               // Calculate 3 * parameter
+        local.set       13                    // Store result in local 13
+        i32.const       1                     // Load constant 1
+        local.set       14                    // Store in local 14
+        local.get       13                    // Get 3 * parameter
+        local.get       14                    // Get constant 1
+        i32.add                               // Calculate (3 * parameter) + 1
+        local.set       15                    // Store result in local 15
+        local.get       15                    // Get calculation result
+        local.set       10                    // Store in local 10 (return value)
+        end_block                             // End of outer block
+
+        // Return the result
+        local.get       10                    // Get return value
+        local.set       16                    // Move to final return register
+        local.get       16                    // Get return value
+        return                                // Return from the function
+        end_function

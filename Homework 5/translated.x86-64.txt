@@ -1,0 +1,28 @@
+f(int):
+        push    rbp                      // Save old base pointer on the stack
+        mov     rbp, rsp                 // Set new base pointer to current stack pointer
+        mov     DWORD PTR [rbp-4], edi   // Store function parameter (from edi) at [rbp-4]
+        
+        mov     eax, DWORD PTR [rbp-4]   // Load parameter into eax
+        and     eax, 1                   // Bitwise AND with 1 to check if odd or even (n & 1)
+        test    eax, eax                 // Test if result is 0 (even) or 1 (odd)
+        jne     .L2                      // Jump to .L2 if number is odd (result was 1)
+        
+        // For even numbers: calculate n/2
+        mov     eax, DWORD PTR [rbp-4]   // Load parameter into eax again
+        mov     edx, eax                 // Copy parameter to edx
+        shr     edx, 31                  // Shift right by 31 bits (gets sign bit only)
+        add     eax, edx                 // Add sign bit to handle negative numbers properly
+        sar     eax                      // Shift arithmetic right by 1 (same as dividing by 2)
+        jmp     .L4                      // Jump to return section
+        
+.L2:    // For odd numbers: calculate 3*n + 1
+        mov     edx, DWORD PTR [rbp-4]   // Load parameter into edx
+        mov     eax, edx                 // Copy parameter to eax
+        add     eax, eax                 // Double the value (eax = 2*n)
+        add     eax, edx                 // Add original value (eax = 3*n)
+        add     eax, 1                   // Add 1 (eax = 3*n + 1)
+        
+.L4:    // Return section
+        pop     rbp                      // Restore original base pointer
+        ret                              // Return with result in eax
