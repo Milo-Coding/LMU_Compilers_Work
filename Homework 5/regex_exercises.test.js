@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "assert";
-import { matches } from "../regex_exercises.js";
+import { matches } from "./regex_exercises.js";
 
 const testFixture = {
   canadianPostalCode: {
